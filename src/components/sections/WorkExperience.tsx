@@ -1,8 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Briefcase } from "lucide-react";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { cn } from "@/lib/utils";
 
 interface Experience {
   title: string;
@@ -60,58 +58,48 @@ const WorkExperience = () => {
         <h2 className="text-3xl md:text-4xl font-bold mb-12">Work Experience</h2>
         
         <div className="space-y-8">
-          {experiences.map((exp, index) => {
-            const { elementRef, isVisible } = useScrollAnimation();
-            const isEven = index % 2 === 0;
-            
-            return (
-              <Card 
-                key={index}
-                ref={elementRef}
-                className={cn(
-                  "glass p-6 opacity-0 transition-all duration-700",
-                  isVisible && "opacity-100 translate-x-0",
-                  isEven ? "-translate-x-full" : "translate-x-full",
-                  isVisible && "transform-none"
-                )}
-              >
-                <div className="flex flex-col md:flex-row md:items-start gap-4">
-                  <div className="flex-shrink-0">
-                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                      <Briefcase className="h-6 w-6 text-primary" />
+          {experiences.map((exp, index) => (
+            <Card 
+              key={index}
+              className="glass p-6 hover:scale-105 transition-transform duration-300 animate-card-enter"
+              style={{ animationDelay: `${(index + 1) * 200}ms` }}
+            >
+              <div className="flex flex-col md:flex-row md:items-start gap-4">
+                <div className="flex-shrink-0">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                    <Briefcase className="h-6 w-6 text-primary" />
+                  </div>
+                </div>
+                
+                <div className="flex-grow">
+                  <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                    <div>
+                      <h3 className="text-xl font-semibold">{exp.title}</h3>
+                      <p className="text-muted-foreground">{exp.company}</p>
+                    </div>
+                    <div className="text-right mt-2 md:mt-0">
+                      <p className="text-sm text-primary">{exp.period}</p>
+                      <p className="text-sm text-muted-foreground">{exp.location}</p>
                     </div>
                   </div>
                   
-                  <div className="flex-grow">
-                    <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
-                      <div>
-                        <h3 className="text-xl font-semibold">{exp.title}</h3>
-                        <p className="text-muted-foreground">{exp.company}</p>
-                      </div>
-                      <div className="text-right mt-2 md:mt-0">
-                        <p className="text-sm text-primary">{exp.period}</p>
-                        <p className="text-sm text-muted-foreground">{exp.location}</p>
-                      </div>
-                    </div>
-                    
-                    <ul className="list-disc list-inside space-y-2 mb-4 text-muted-foreground">
-                      {exp.description.map((item, i) => (
-                        <li key={i}>{item}</li>
-                      ))}
-                    </ul>
-                    
-                    <div className="flex flex-wrap gap-2">
-                      {exp.technologies.map((tech, i) => (
-                        <Badge key={i} variant="secondary" className="text-xs">
-                          {tech}
-                        </Badge>
-                      ))}
-                    </div>
+                  <ul className="list-disc list-inside space-y-2 mb-4 text-muted-foreground">
+                    {exp.description.map((item, i) => (
+                      <li key={i}>{item}</li>
+                    ))}
+                  </ul>
+                  
+                  <div className="flex flex-wrap gap-2">
+                    {exp.technologies.map((tech, i) => (
+                      <Badge key={i} variant="secondary" className="text-xs">
+                        {tech}
+                      </Badge>
+                    ))}
                   </div>
                 </div>
-              </Card>
-            );
-          })}
+              </div>
+            </Card>
+          ))}
         </div>
       </div>
     </section>
