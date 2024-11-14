@@ -99,11 +99,11 @@ const Index = () => {
             technical expertise with creative problem-solving to create solutions that exceed expectations.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
-            <Card className="glass p-6 text-left">
+            <Card className="glass p-6 text-left animate-card-enter [animation-delay:200ms]">
               <h3 className="text-xl font-semibold mb-4">Education</h3>
               <p className="text-muted-foreground">B.S. in Computer Science<br />University of Technology</p>
             </Card>
-            <Card className="glass p-6 text-left">
+            <Card className="glass p-6 text-left animate-card-enter [animation-delay:400ms]">
               <h3 className="text-xl font-semibold mb-4">Experience</h3>
               <p className="text-muted-foreground">Senior Frontend Developer<br />Tech Solutions Inc.</p>
             </Card>
@@ -118,7 +118,11 @@ const Index = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-12">Technical Expertise</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {skills.map((skill, index) => (
-              <Card key={index} className="glass p-6 hover:scale-105 transition-transform duration-300">
+              <Card 
+                key={index} 
+                className="glass p-6 hover:scale-105 transition-transform duration-300 animate-card-enter"
+                style={{ animationDelay: `${(index + 1) * 200}ms` }}
+              >
                 <div className="mb-4 text-primary">{skill.icon}</div>
                 <h3 className="text-xl font-semibold mb-2">{skill.name}</h3>
                 <p className="text-muted-foreground">{skill.description}</p>
@@ -134,8 +138,12 @@ const Index = () => {
           <Badge className="mb-4">Projects</Badge>
           <h2 className="text-3xl md:text-4xl font-bold mb-12">Selected Work</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {[1, 2, 3, 4].map((project) => (
-              <Card key={project} className="glass group overflow-hidden hover:scale-105 transition-transform duration-300">
+            {[1, 2, 3, 4].map((project, index) => (
+              <Card 
+                key={project} 
+                className="glass group overflow-hidden hover:scale-105 transition-transform duration-300 animate-card-enter"
+                style={{ animationDelay: `${(index + 1) * 200}ms` }}
+              >
                 <div className="p-6">
                   <Badge className="mb-4" variant="secondary">Featured Project</Badge>
                   <h3 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors">
@@ -172,14 +180,18 @@ const Index = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-12">What People Say</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <Card key={index} className="glass p-6 hover:scale-105 transition-transform duration-300">
+              <Card 
+                key={index} 
+                className="glass p-6 hover:scale-105 transition-transform duration-300 animate-card-enter flex flex-col"
+                style={{ animationDelay: `${(index + 1) * 200}ms` }}
+              >
                 <div className="flex items-center mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <Star key={i} className="h-4 w-4 fill-primary text-primary" />
                   ))}
                 </div>
-                <p className="text-muted-foreground mb-4">{testimonial.content}</p>
-                <div>
+                <p className="text-muted-foreground mb-4 flex-grow">{testimonial.content}</p>
+                <div className="mt-auto">
                   <p className="font-semibold">{testimonial.name}</p>
                   <p className="text-sm text-muted-foreground">{testimonial.role}</p>
                 </div>

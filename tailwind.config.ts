@@ -18,6 +18,9 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ['Poppins', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -75,12 +78,23 @@ export default {
           "0%": { opacity: "0", transform: "translateX(20px)" },
           "100%": { opacity: "1", transform: "translateX(0)" },
         },
+        "card-enter": {
+          "0%": { 
+            opacity: "0",
+            transform: "scale(0.95) translateY(20px)"
+          },
+          "100%": {
+            opacity: "1",
+            transform: "scale(1) translateY(0)"
+          }
+        }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in": "fade-in 0.5s ease-out forwards",
         "fade-in-right": "fade-in-right 0.5s ease-out forwards",
+        "card-enter": "card-enter 0.5s ease-out forwards",
       },
     },
   },
