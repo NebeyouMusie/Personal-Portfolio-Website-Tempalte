@@ -75,3 +75,17 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Add alternating animations for cards */
+.animate-on-scroll:nth-child(even) {
+  transform: translateX(20px);
+}
+
+.animate-on-scroll:nth-child(odd) {
+  transform: translateX(-20px);
+}
+
+.animate-on-scroll.visible:nth-child(even),
+.animate-on-scroll.visible:nth-child(odd) {
+  transform: translateX(0);
+}

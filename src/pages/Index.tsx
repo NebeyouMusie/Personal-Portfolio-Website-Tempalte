@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { 
   Github, 
   Linkedin, 
@@ -44,6 +45,12 @@ const testimonials = [
 ];
 
 const Index = () => {
+  const aboutRef = useScrollAnimation();
+  const skillsRef = useScrollAnimation();
+  const projectsRef = useScrollAnimation();
+  const testimonialsRef = useScrollAnimation();
+  const contactRef = useScrollAnimation();
+
   const scrollToProjects = () => {
     document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -90,8 +97,12 @@ const Index = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="section-padding bg-muted/30">
-        <div className="max-w-4xl mx-auto text-center">
+      <section 
+        id="about" 
+        className="section-padding bg-muted/30"
+        ref={aboutRef}
+      >
+        <div className="max-w-4xl mx-auto text-center animate-on-scroll">
           <Badge className="mb-4">About Me</Badge>
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Passionate About Creating</h2>
           <p className="text-lg text-muted-foreground mb-8">
@@ -116,8 +127,12 @@ const Index = () => {
       <WorkExperience />
 
       {/* Skills Section */}
-      <section id="skills" className="section-padding">
-        <div className="max-w-6xl mx-auto">
+      <section 
+        id="skills" 
+        className="section-padding"
+        ref={skillsRef}
+      >
+        <div className="max-w-6xl mx-auto animate-on-scroll">
           <Badge className="mb-4">Skills</Badge>
           <h2 className="text-3xl md:text-4xl font-bold mb-12">Technical Expertise</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -137,8 +152,12 @@ const Index = () => {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="section-padding bg-muted/30">
-        <div className="max-w-6xl mx-auto">
+      <section 
+        id="projects" 
+        className="section-padding bg-muted/30"
+        ref={projectsRef}
+      >
+        <div className="max-w-6xl mx-auto animate-on-scroll">
           <Badge className="mb-4">Projects</Badge>
           <h2 className="text-3xl md:text-4xl font-bold mb-12">Selected Work</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -178,8 +197,12 @@ const Index = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonials" className="section-padding">
-        <div className="max-w-6xl mx-auto">
+      <section 
+        id="testimonials" 
+        className="section-padding"
+        ref={testimonialsRef}
+      >
+        <div className="max-w-6xl mx-auto animate-on-scroll">
           <Badge className="mb-4">Testimonials</Badge>
           <h2 className="text-3xl md:text-4xl font-bold mb-12">What People Say</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -206,8 +229,11 @@ const Index = () => {
       </section>
 
       {/* Contact Section */}
-      <section className="section-padding bg-muted/30">
-        <div className="max-w-4xl mx-auto text-center">
+      <section 
+        className="section-padding bg-muted/30"
+        ref={contactRef}
+      >
+        <div className="max-w-4xl mx-auto text-center animate-on-scroll">
           <Badge className="mb-4">Get in Touch</Badge>
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Let's Work Together</h2>
           <p className="text-lg text-muted-foreground mb-8">
