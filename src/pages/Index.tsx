@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { 
   Github, 
   Linkedin, 
@@ -46,6 +47,11 @@ const Index = () => {
   const scrollToProjects = () => {
     document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  // Create refs for each section's animations
+  const skillRefs = skills.map(() => useScrollAnimation());
+  const projectRefs = [1, 2, 3, 4].map(() => useScrollAnimation());
+  const testimonialRefs = testimonials.map(() => useScrollAnimation());
 
   return (
     <main className="min-h-screen">
@@ -118,15 +124,17 @@ const Index = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-12">Technical Expertise</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {skills.map((skill, index) => (
-              <Card 
-                key={index} 
-                className="glass p-6 hover:scale-105 transition-transform duration-300 animate-card-enter"
-                style={{ animationDelay: `${(index + 1) * 200}ms` }}
+              <div 
+                key={index}
+                ref={skillRefs[index]}
+                className={`animate-on-scroll ${index % 2 === 0 ? 'from-left' : 'from-right'}`}
               >
-                <div className="mb-4 text-primary">{skill.icon}</div>
-                <h3 className="text-xl font-semibold mb-2">{skill.name}</h3>
-                <p className="text-muted-foreground">{skill.description}</p>
-              </Card>
+                <Card className="glass p-6 hover:scale-105 transition-transform duration-300">
+                  <div className="mb-4 text-primary">{skill.icon}</div>
+                  <h3 className="text-xl font-semibold mb-2">{skill.name}</h3>
+                  <p className="text-muted-foreground">{skill.description}</p>
+                </Card>
+              </div>
             ))}
           </div>
         </div>
@@ -139,35 +147,37 @@ const Index = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-12">Selected Work</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[1, 2, 3, 4].map((project, index) => (
-              <Card 
-                key={project} 
-                className="glass group overflow-hidden hover:scale-105 transition-transform duration-300 animate-card-enter"
-                style={{ animationDelay: `${(index + 1) * 200}ms` }}
+              <div
+                key={project}
+                ref={projectRefs[index]}
+                className={`animate-on-scroll ${index % 2 === 0 ? 'from-left' : 'from-right'}`}
               >
-                <div className="p-6">
-                  <Badge className="mb-4" variant="secondary">Featured Project</Badge>
-                  <h3 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors">
-                    Project Title {project}
-                  </h3>
-                  <p className="text-muted-foreground mb-4">
-                    A brief description of the project and the technologies used in its development.
-                  </p>
-                  <div className="flex gap-2">
-                    <Button variant="outline" size="sm" asChild>
-                      <a href="#" target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="mr-2 h-4 w-4" />
-                        Live Demo
-                      </a>
-                    </Button>
-                    <Button variant="outline" size="sm" asChild>
-                      <a href="#" target="_blank" rel="noopener noreferrer">
-                        <Github className="mr-2 h-4 w-4" />
-                        Source
-                      </a>
-                    </Button>
+                <Card className="glass group overflow-hidden hover:scale-105 transition-transform duration-300">
+                  <div className="p-6">
+                    <Badge className="mb-4" variant="secondary">Featured Project</Badge>
+                    <h3 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors">
+                      Project Title {project}
+                    </h3>
+                    <p className="text-muted-foreground mb-4">
+                      A brief description of the project and the technologies used in its development.
+                    </p>
+                    <div className="flex gap-2">
+                      <Button variant="outline" size="sm" asChild>
+                        <a href="#" target="_blank" rel="noopener noreferrer">
+                          <ExternalLink className="mr-2 h-4 w-4" />
+                          Live Demo
+                        </a>
+                      </Button>
+                      <Button variant="outline" size="sm" asChild>
+                        <a href="#" target="_blank" rel="noopener noreferrer">
+                          <Github className="mr-2 h-4 w-4" />
+                          Source
+                        </a>
+                      </Button>
+                    </div>
                   </div>
-                </div>
-              </Card>
+                </Card>
+              </div>
             ))}
           </div>
         </div>
@@ -180,22 +190,26 @@ const Index = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-12">What People Say</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <Card 
-                key={index} 
-                className="glass p-6 hover:scale-105 transition-transform duration-300 animate-card-enter flex flex-col"
-                style={{ animationDelay: `${(index + 1) * 200}ms` }}
+              <div
+                key={index}
+                ref={testimonialRefs[index]}
+                className={`animate-on-scroll ${
+                  index === 0 ? 'from-left' : index === 1 ? 'from-bottom' : 'from-right'
+                }`}
               >
-                <div className="flex items-center mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-primary text-primary" />
-                  ))}
-                </div>
-                <p className="text-muted-foreground mb-4 flex-grow">{testimonial.content}</p>
-                <div className="mt-auto">
-                  <p className="font-semibold">{testimonial.name}</p>
-                  <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                </div>
-              </Card>
+                <Card className="glass p-6 hover:scale-105 transition-transform duration-300 h-full flex flex-col">
+                  <div className="flex items-center mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="h-4 w-4 fill-primary text-primary" />
+                    ))}
+                  </div>
+                  <p className="text-muted-foreground mb-4 flex-grow">{testimonial.content}</p>
+                  <div className="mt-auto">
+                    <p className="font-semibold">{testimonial.name}</p>
+                    <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                  </div>
+                </Card>
+              </div>
             ))}
           </div>
         </div>

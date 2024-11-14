@@ -63,15 +63,30 @@
   .section-padding {
     @apply py-20 px-6 md:px-12 lg:px-24;
   }
-}
 
-.animate-on-scroll {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.6s ease-out;
-}
+  .animate-on-scroll {
+    opacity: 0;
+    transition: all 0.6s ease-out;
+  }
 
-.animate-on-scroll.visible {
-  opacity: 1;
-  transform: translateY(0);
+  .animate-on-scroll.from-left {
+    transform: translateX(-50px);
+  }
+
+  .animate-on-scroll.from-right {
+    transform: translateX(50px);
+  }
+
+  .animate-on-scroll.from-bottom {
+    transform: translateY(50px);
+  }
+
+  .animate-on-scroll.from-top {
+    transform: translateY(-50px);
+  }
+
+  .animate-on-scroll.visible {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
 }
