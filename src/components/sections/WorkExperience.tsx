@@ -1,7 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Briefcase } from "lucide-react";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 interface Experience {
   title: string;
@@ -52,15 +51,9 @@ const experiences: Experience[] = [
 ];
 
 const WorkExperience = () => {
-  const sectionRef = useScrollAnimation();
-
   return (
-    <section 
-      id="experience" 
-      className="section-padding bg-muted/30"
-      ref={sectionRef}
-    >
-      <div className="max-w-6xl mx-auto animate-on-scroll">
+    <section id="experience" className="section-padding bg-muted/30">
+      <div className="max-w-6xl mx-auto">
         <Badge className="mb-4">Experience</Badge>
         <h2 className="text-3xl md:text-4xl font-bold mb-12">Work Experience</h2>
         
@@ -68,12 +61,8 @@ const WorkExperience = () => {
           {experiences.map((exp, index) => (
             <Card 
               key={index}
-              className="glass p-6 hover:scale-105 transition-transform duration-300 animate-on-scroll"
-              style={{ 
-                animationDelay: `${(index + 1) * 200}ms`,
-                transform: 'translateY(20px)',
-                opacity: 0
-              }}
+              className="glass p-6 hover:scale-105 transition-transform duration-300 animate-card-enter"
+              style={{ animationDelay: `${(index + 1) * 200}ms` }}
             >
               <div className="flex flex-col md:flex-row md:items-start gap-4">
                 <div className="flex-shrink-0">
