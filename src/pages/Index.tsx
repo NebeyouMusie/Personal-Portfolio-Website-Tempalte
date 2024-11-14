@@ -13,6 +13,7 @@ import {
   Database,
   Star
 } from "lucide-react";
+import WorkExperience from "@/components/sections/WorkExperience";
 
 const skills = [
   { name: "Frontend Development", icon: <Code className="h-6 w-6" />, description: "React, TypeScript, Tailwind CSS" },
@@ -110,6 +111,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Work Experience Section */}
+      <WorkExperience />
 
       {/* Skills Section */}
       <section id="skills" className="section-padding">
